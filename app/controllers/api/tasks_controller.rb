@@ -1,4 +1,4 @@
-class Api::TaskController < ApplicationController
+class Api::TasksController < ApplicationController
   def index
     @tasks = Task.order('updated_at DESC')
   end
