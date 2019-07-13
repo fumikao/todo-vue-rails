@@ -6,9 +6,13 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from 'vue/dist/vue.esm.js'
+import Header from './components/header.vue'
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  components: {
+    'navbar': Header
+  }
 })
 
 // The above code uses Vue without the compiler, which means you cannot
