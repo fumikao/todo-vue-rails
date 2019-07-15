@@ -16,7 +16,7 @@
         <li :id="'row_task_' + task.id" class="collection-item" v-for="task in tasks" v-if="!task.is_done">
           <label>
             <input type="checkbox" @change="doneTask(task.id)" :id="'task_' + task.id" />
-            <span :for="'task_' + task.id" class="black-text">{{ task.name }}</span>
+            <span class="black-text">{{ task.name }}</span>
           </label>
         </li>
       </ul>
@@ -29,7 +29,7 @@
         <li v-for="task in tasks" v-if="task.is_done" :id="'row_task_' + task.id" class="collection-item">
           <label>
             <input type="checkbox" :id="'task_' + task.id" checked="checked" />
-            <span :for="'task_' + task.id" class="line-through">{{ task.name }}</span>
+            <span class="line-through">{{ task.name }}</span>
           </label>
         </li>
       </ul>
