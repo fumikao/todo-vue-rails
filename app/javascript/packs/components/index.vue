@@ -64,7 +64,10 @@ export default {
       document.querySelector('#finished-tasks').classList.toggle('display_none')
     },
     createTask: function(){
-      if (!this.newTask) return;
+      if (!this.newTask){
+        alert('taskを入力してください')
+        return
+      };
       axios.post('/api/tasks', { task: { name: this.newTask } }).then((response) => {
         this.tasks.unshift(response.data.task)
         this.newTask = ''
