@@ -15,7 +15,7 @@
       <ul class="collection">
         <li :id="'row_task_' + task.id" class="collection-item" v-for="task in tasks" v-if="!task.is_done">
           <label>
-            <input type="checkbox" @change="doneTask(task.id)" :id="'task_' + task.id" />
+            <input type="checkbox" @click="doneTask(task.id)" :id="'task_' + task.id" />
             <span class="black-text">{{ task.name }}</span>
           </label>
         </li>
