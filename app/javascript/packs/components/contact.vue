@@ -1,7 +1,6 @@
 <template>
   <div>
-    <!-- 内容はお好みで -->
-    <p>If you want to contact me, you send mail to below address.</p>
-    <p>test@example.com</p>
+    <p>お気軽にご連絡ください！</p>
+    <p>Twitter:<a href="https://twitter.com/fumika78143169" target="_blank" class="twitter">@fumika78143169</a></p>
   </div>
 </template>
