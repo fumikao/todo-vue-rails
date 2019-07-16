@@ -17,6 +17,9 @@
           <label>
             <input type="checkbox" @click="doneTask(task.id)" :id="'task_' + task.id" />
             <span class="black-text">{{ task.name }}</span>
+            <button class="btn-floating btn-small waves-effect waves-light cyan lighten-3" @click="deleteTask(task.id)">
+              <i class="material-icons">clear</i>
+            </button>
           </label>
         </li>
       </ul>
@@ -30,6 +33,9 @@
           <label>
             <input type="checkbox" :id="'task_' + task.id" checked="checked" />
             <span class="line-through">{{ task.name }}</span>
+            <button class="btn-floating btn-small waves-effect waves-light cyan lighten-3" @click="deleteTask(task.id)">
+              <i class="material-icons">clear</i>
+            </button>
           </label>
         </li>
       </ul>
@@ -75,6 +81,14 @@ export default {
         console.log(error)
       })
     },
+    deleteTask: function(task_id){
+      var deleted_el = document.querySelector('#row_task_' + task_id)
+      axios.delete('/api/tasks/' + task_id).then((response) => {
+        deleted_el.classList.add('display_none')
+      }, (error) => {
+        console.log(error)
+      })
+    },
     doneTask: function(task_id){
       axios.put('/api/tasks/' + task_id, { task: { is_done: 1 } }).then((response) => {
         this.moveFinishedTask(task_id)
@@ -85,6 +99,7 @@ export default {
     moveFinishedTask: function(task_id){
       var el = document.querySelector('#row_task_' + task_id)
       var el_clone = el.cloneNode(true)
+      console.log(el_clone)
       el.classList.add('display_none')
       el_clone.getElementsByTagName('input')[0].checked = 'checked'
       el_clone.getElementsByTagName('span')[0].classList.add('line-through')
@@ -107,5 +122,9 @@ export default {
 
 .line-through {
   text-decoration: line-through;
+}
+
+button {
+  float: right;
 }
 </style>
