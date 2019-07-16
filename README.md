@@ -1,24 +1,16 @@
-# README
+TODO Vue.js + Rails
+====
+## 概要
+RailsアプリにVue.jsを導入する練習のために作成しました。
+TODOリストを管理できます。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 機能
+- TODO作成・削除
+- チェックの有無によりTODOを移動
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用技術
+- Ruby
+- Ruby on Rails
+- Vue.js
+- Materialize
+- MySQL
