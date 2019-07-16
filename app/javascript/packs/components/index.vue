@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div>
+    <div id="not-yet-tasks">
       <ul class="collection">
         <li :id="'row_task_' + task.id" class="collection-item" v-for="task in tasks" v-if="!task.is_done">
           <label>
@@ -31,7 +31,7 @@
       <ul class="collection">
         <li v-for="task in tasks" v-if="task.is_done" :id="'row_task_' + task.id" class="collection-item">
           <label>
-            <input type="checkbox" :id="'task_' + task.id" checked="checked" />
+            <input type="checkbox" @click="waitingTask(task.id)" :id="'task_' + task.id" checked="checked" />
             <span class="line-through">{{ task.name }}</span>
             <button class="btn-floating btn-small waves-effect waves-light cyan lighten-3" @click="deleteTask(task.id)">
               <i class="material-icons">clear</i>
@@ -99,13 +99,29 @@ export default {
     moveFinishedTask: function(task_id){
       var el = document.querySelector('#row_task_' + task_id)
       var el_clone = el.cloneNode(true)
-      console.log(el_clone)
       el.classList.add('display_none')
       el_clone.getElementsByTagName('input')[0].checked = 'checked'
       el_clone.getElementsByTagName('span')[0].classList.add('line-through')
       el_clone.getElementsByTagName('span')[0].classList.remove('black-text')
       var li = document.querySelector('#finished-tasks > ul > li:first-child')
       document.querySelector('#finished-tasks > ul').insertBefore(el_clone, li)
+    },
+    waitingTask: function(task_id){
+      axios.put('/api/tasks/' + task_id, { task: { is_done: 0} }).then((response) => {
+        this.moveNotYetTask(task_id)
+      }, (error) => {
+        console.log(error)
+      })
+    },
+    moveNotYetTask: function(task_id){
+      var el = document.querySelector('#row_task_' + task_id)
+      var el_clone = el.cloneNode(true)
+      el.classList.add('display_none')
+      el_clone.getElementsByTagName('input')[0].checked = ''
+      el_clone.getElementsByTagName('span')[0].classList.remove('line-through')
+      el_clone.getElementsByTagName('span')[0].classList.add('black-text')
+      var li = document.querySelector('#not-yet-tasks > ul > li:first-child')
+      document.querySelector('#not-yet-tasks > ul').insertBefore(el_clone, li)
     }
   }
 }
